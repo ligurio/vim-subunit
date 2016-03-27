@@ -1,7 +1,3 @@
-" TODO:
-"	add plugin to http://www.vim.org/scripts/script.php?script_id=1945
-"	add plugin to https://bugs.launchpad.net/subunit/+bug/591410
-
 " Vim syntax file
 " Language:    SubUnit Output
 " Maintainer:  Sergey Bronnikov <sergeyb@bronevichok.ru>

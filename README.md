@@ -12,6 +12,6 @@ like this to your vimrc:
 	au BufRead,BufNewFile *.subunit set filetype=subunit
 ~~~
 
-## Screenshots
+## Screenshot
 
 ![img1](http://i.imgur.com/BTNZc7h.png)
