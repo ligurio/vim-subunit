@@ -16,19 +16,23 @@ elseif exists("b:current_syntax")
   finish
 endif
 
-syn match Test "^\[test\|testing\|test:\|testing:\]"
-syn match Success "^\[success\|successful\|success:\|sucessful:\]" 
-syn match Failure "^\[failure\|failure:\]" 
-syn match Error "^error" 
-syn match Skip "^\[skip\|skip:\]"
-syn match XFail "^\[xfail\|xfail:\]" 
-syn match UXSuccess "^\[uxsuccess\|uxsuccess:\]" 
-syn match Progress "^progress:"
-syn match Tags "^tags:"
-syn match Time "^time:" 
-
-syn match TimeString "=\zs[[:alnum:]/_]\+\ze" contained
-syn match TestString "=\zs[[:alnum:]/_]\+\ze" contained
+syn match Label '\([[:alnum:]\-\.]*\)'
+syn keyword Status test testing
+syn keyword Status success successful
+syn keyword Status failure
+syn keyword Status error
+syn keyword Status skip
+syn keyword Status xfail
+syn keyword Status uxsuccess
+syn keyword Status nextgroup=Label skipwhite
+syn match ProgressValue '\d\+'
+syn match ProgressValue '[-+]\d\+'
+syn match ProgressValue '[pop\|push]'
+syn keyword Progress progress nextgroup=ProgressValue skipwhite
+syn match TagsValue '.*'
+syn keyword Tags tags nextgroup=TagsValue skipwhite
+syn match TimeValue /\d\{4\}-\d\{2\}-\d\{2\}\s+\d\{2\}:\d\{2\}:\d\{2\}\.\d+Z/
+syn keyword Time time nextgroup=TimeValue skipwhite
 
 :if version >= 508 || !exists("did_conf_syntax_inits")
   if version < 508
@@ -38,16 +42,14 @@ syn match TestString "=\zs[[:alnum:]/_]\+\ze" contained
     command -nargs=+ HiLink hi def link <args>
   endif
 
-  HiLink        Test	Keyword
-  HiLink        Success Keyword
-  HiLink        Failure Keyword
-  HiLink        Error Keyword
-  HiLink        Skip Keyword
-  HiLink        XFail Keyword
-  HiLink        UXsuccess Keyword
+  HiLink        Label Identifier
+  HiLink        Status Keyword
   HiLink        Progress Keyword
+  HiLink        ProgressValue Identifier
   HiLink        Tags Keyword
+  HiLink        TagsValue Identifier
   HiLink        Time Keyword
+  HiLink        TimeValue Identifier
  delcommand HiLink
 endif
 
